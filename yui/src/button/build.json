@@ -1,0 +1,10 @@
+{
+  "name": "moodle-atto_ipakeyboard-button",
+  "builds": {
+    "moodle-atto_ipakeyboard-button": {
+      "jsfiles": [
+        "button.js"
+      ]
+    }
+  }
+}

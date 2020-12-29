@@ -1,0 +1,5 @@
+# Exclude files from exporting.
+.editorconfig  export-ignore
+.gitattributes export-ignore
+.github        export-ignore
+.gitignore     export-ignore
