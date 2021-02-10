@@ -54,7 +54,7 @@ var COMPONENTNAME = 'atto_ipakeyboard',
         [
             M.util.get_string('vowels', COMPONENTNAME),
             ['ɪ', 'ʏ', 'ɨ', 'ʉ', 'ɯ', 'ʊ', 'ø', 'ɘ', 'ɵ', 'ɤ', 'ə', 'ɚ', 'ɛ', 'œ', 'ɜ', 'ɝ', 'ɞ', 'ʌ', 'ɔ', 'æ', 'ɶ', 'ɐ',
-                'ɑ', 'ɒ'],
+                'ɑ', 'ɒ', 'ɛ̃', 'œ̃', 'ɔ̃', 'ɑ̃'],
         ],
         [
             M.util.get_string('spacing_diacritics', COMPONENTNAME),
