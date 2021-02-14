@@ -104,17 +104,23 @@ Y.namespace('M.atto_ipakeyboard').Button = Y.Base.create('button', Y.M.editor_at
 
     _createToolbox: function() {
         var template = Y.Handlebars.compile(
-            '<div class="{{CSS.CHARMAP}}" data-show="0">' +
+            '<dl class="{{CSS.CHARMAP}} px-1" data-show="0">' +
                 '{{#each CHARMAP}}' +
-                    '<span class="font-weight-bold mr-1">{{this.[0]}}</span>' +
-                    '{{#each this.[1]}}' +
-                    '<button class="btn btn-secondary btn m-1 {{../../CSS.BUTTON}}" ' +
-                        'data-character="{{this}}" ' +
-                        'onClick="return false;" ' +
-                    '>{{{this}}}</button>' +
-                    '{{/each}}' +
+                '<dt class="mt-2 mr-1">{{this.[0]}}</dt>' +
+                '<dd class="m-0">' +
+                    '<ul class="list-inline m-0">' +
+                        '{{#each this.[1]}}' +
+                        '<li class="list-inline-item m-0">' +
+                            '<button class="btn btn-secondary btn m-1 {{../../CSS.BUTTON}}" ' +
+                            'data-character="{{this}}" ' +
+                            'onClick="return false;" ' +
+                            '>{{{this}}}</button>' +
+                        '</li>' +
+                        '{{/each}}' +
+                    '</ul>' +
+                '</dd>' +
                 '{{/each}}' +
-            '</div>'
+            '</dl>'
         );
 
         var content = Y.Node.create(template({
