@@ -95,6 +95,8 @@ Y.namespace('M.atto_ipakeyboard').Button = Y.Base.create('button', Y.M.editor_at
     _toolbox: null,
 
     initializer: function() {
+        this._setEventListeners();
+
         this.addButton({
             icon: 'icon',
             iconComponent: 'atto_ipakeyboard',
@@ -143,12 +145,25 @@ Y.namespace('M.atto_ipakeyboard').Button = Y.Base.create('button', Y.M.editor_at
         }
 
         if (this._toolbox.getData('show') == 1) {
-            this._toolbox.hide();
-            this._toolbox.setData('show', 0);
+            this._hideToolbox();
         } else {
-            this._toolbox.show();
-            this._toolbox.setData('show', 1);
+            this._showToolbox();
         }
+    },
+
+    /**
+     * Hide toolbox dialogue.
+     *
+     * @method _hideToolbox
+     * @private
+     */
+    _hideToolbox: function() {
+        if (this._toolbox === null) {
+            return;
+        }
+
+        this._toolbox.hide();
+        this._toolbox.setData('show', 0);
     },
 
     /**
@@ -170,7 +185,53 @@ Y.namespace('M.atto_ipakeyboard').Button = Y.Base.create('button', Y.M.editor_at
 
         // And mark the text area as updated.
         this.markUpdated();
-    }
+    },
+
+    /**
+     * Set event Listeners to hide Toolbox when Atto editor is hidden.
+     *
+     * @method  _setEventListeners
+     * @private
+     */
+    _setEventListeners: function() {
+        var toolbox = this;
+
+        var observer = new MutationObserver(function(mutationsList) {
+            mutationsList.forEach(function(mutation) {
+                if (mutation.type !== 'attributes') {
+                    return;
+                }
+
+                if (mutation.attributeName !== 'hidden') {
+                    return;
+                }
+
+                if (mutation.target.hidden === false) {
+                    return;
+                }
+
+                toolbox._hideToolbox();
+            });
+        });
+
+        var editor = this.get('host').editor;
+        observer.observe(editor._node, {attributes: true});
+    },
+
+    /**
+     * Show toolbox dialogue.
+     *
+     * @method _showToolbox
+     * @private
+     */
+    _showToolbox: function() {
+        if (this._toolbox === null) {
+            return;
+        }
+
+        this._toolbox.show();
+        this._toolbox.setData('show', 1);
+    },
 });
 
 
