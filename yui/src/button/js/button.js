@@ -178,13 +178,18 @@ Y.namespace('M.atto_ipakeyboard').Button = Y.Base.create('button', Y.M.editor_at
      * @private
      */
     _insertChar: function(e) {
+        // Focus on the editable area for this editor.
+        var host = this.get('host');
+        host.focus();
+
+        // Get character to insert.
         var character = e.target.getData('character');
 
         if (character.length === 1) {
             document.execCommand('insertText', false, character);
         } else {
             // Gère l'insertion des caractères combinés.
-            this.get('host').insertContentAtFocusPoint(character);
+            host.insertContentAtFocusPoint(character);
         }
 
         // And mark the text area as updated.
